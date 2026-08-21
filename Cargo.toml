@@ -44,7 +44,7 @@ url = "2.5"
 nix = "0.30"
 clap = { version = "4.5", features = ["derive"] }
 switcheroo-control = { git = "https://github.com/Matrinsoft/dbus-settings-bindings" }
-cosmic-app-list-config = { git = "https://github.com/Matrinsoft/cosmic-applets" }
+cosmic-app-list-config = { git = "https://github.com/Matrinsoft/lingmo-applets" }
 # cosmic-app-list-config = { path = "../cosmic-applets/cosmic-app-list/cosmic-app-list-config/" }
 
 [profile.release]

@@ -1026,7 +1026,7 @@ dependencies = [
 [[package]]
 name = "cosmic-app-list-config"
 version = "1.0.15"
-source = "git+https://github.com/Matrinsoft/cosmic-applets#3f4d0f43a0a7e75c983c83ca09454e65afc3bc71"
+source = "git+https://github.com/Matrinsoft/lingmo-applets#3f4d0f43a0a7e75c983c83ca09454e65afc3bc71"
 dependencies = [
  "libcosmic",
  "serde",
@@ -1035,7 +1035,7 @@ dependencies = [
 [[package]]
 name = "cosmic-client-toolkit"
 version = "0.2.0"
-source = "git+https://github.com/Matrinsoft/cosmic-protocols?rev=32283d7#32283d76a8d0342da74c4cc022a533c52dcf378f"
+source = "git+https://github.com/Matrinsoft/lingmo-protocols?rev=32283d7#32283d76a8d0342da74c4cc022a533c52dcf378f"
 dependencies = [
  "bitflags 2.13.0",
  "cosmic-protocols",
@@ -1092,7 +1092,7 @@ dependencies = [
 [[package]]
 name = "cosmic-panel-config"
 version = "0.1.0"
-source = "git+https://github.com/Matrinsoft/cosmic-panel#029400b2b447d9d31f1a772d7f6f0d5eed2ea21e"
+source = "git+https://github.com/Matrinsoft/lingmo-panel#029400b2b447d9d31f1a772d7f6f0d5eed2ea21e"
 dependencies = [
  "anyhow",
  "cosmic-config",
@@ -1106,7 +1106,7 @@ dependencies = [
 [[package]]
 name = "cosmic-protocols"
 version = "0.2.0"
-source = "git+https://github.com/Matrinsoft/cosmic-protocols?rev=32283d7#32283d76a8d0342da74c4cc022a533c52dcf378f"
+source = "git+https://github.com/Matrinsoft/lingmo-protocols?rev=32283d7#32283d76a8d0342da74c4cc022a533c52dcf378f"
 dependencies = [
  "bitflags 2.13.0",
  "wayland-backend",
@@ -1120,7 +1120,7 @@ dependencies = [
 [[package]]
 name = "cosmic-settings-config"
 version = "0.1.0"
-source = "git+https://github.com/Matrinsoft/cosmic-settings-daemon#8c54bbbc10485c31e8717c21e119e19b87eeb3ea"
+source = "git+https://github.com/Matrinsoft/lingmo-settings-daemon#8c54bbbc10485c31e8717c21e119e19b87eeb3ea"
 dependencies = [
  "cosmic-config",
  "ron 0.11.0",
@@ -6735,7 +6735,7 @@ checksum = "2fb433233f2df9344722454bc7e96465c9d03bff9d77c248f9e7523fe79585b5"
 [[package]]
 name = "xdg-shell-wrapper-config"
 version = "0.1.0"
-source = "git+https://github.com/Matrinsoft/cosmic-panel#029400b2b447d9d31f1a772d7f6f0d5eed2ea21e"
+source = "git+https://github.com/Matrinsoft/lingmo-panel#029400b2b447d9d31f1a772d7f6f0d5eed2ea21e"
 dependencies = [
  "serde",
  "wayland-protocols-wlr",
