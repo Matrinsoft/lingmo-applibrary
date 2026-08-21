@@ -1,0 +1,21 @@
+Source: lingmo-app-library
+Section: admin
+Priority: optional
+Maintainer: Lingmo OS Team <team@lingmo.org>
+Build-Depends:
+  debhelper (>= 11),
+  debhelper-compat (= 11),
+  rust-all,
+  just,
+  pkg-config,
+  libxkbcommon-dev,
+  libwayland-dev,
+Standards-Version: 4.3.0
+Homepage: https://github.com/Matrinsoft/lingmo-app-library
+
+Package: lingmo-app-library
+Architecture: amd64 arm64
+Depends:
+  ${misc:Depends},
+  ${shlibs:Depends}
+Description: Cosmic App Library

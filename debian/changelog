@@ -1,0 +1,17 @@
+lingmo-app-library (5.0.0+lingmo5u1) unstable; urgency=medium
+
+  * New release for Lingmo OS.
+
+ -- Lingmo OS Team <team@lingmo.org>  Fri, 21 Aug 2026 17:31:00 +0800
+
+cosmic-app-library (1.0.12) noble; urgency=medium
+
+  * Update debian changelog
+
+ -- Michael Murphy <mmstick@pop-os>  Mon, 27 Apr 2026 18:14:23 +0200
+
+cosmic-app-library (0.1.0) noble; urgency=medium
+
+  * Initial release.
+
+ -- Ashley Wulber <ashley@system76.com>  Thu, 07 Apr 2022 09:39:19 -0700

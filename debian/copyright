@@ -1,0 +1,8 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: lingmo-app-library
+Source: https://github.com/Matrinsoft/lingmo-app-library
+
+Files: *
+Copyright: Copyright 2022 System76
+           2026 Lingmo OS Team <team@lingmo.org>
+License: GPL-3.0
