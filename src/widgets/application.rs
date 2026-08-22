@@ -2,19 +2,19 @@
 
 use crate::app::AppSource;
 use core::str;
-use lingmo::iced::alignment::Vertical;
-use lingmo::iced::clipboard::mime::{AllowedMimeTypes, AsMimeTypes};
-use lingmo::iced::core::alignment::Horizontal;
-use lingmo::iced::core::widget::{Operation, Tree, tree};
-use lingmo::iced::core::{
+use cosmic::iced::alignment::Vertical;
+use cosmic::iced::clipboard::mime::{AllowedMimeTypes, AsMimeTypes};
+use cosmic::iced::core::alignment::Horizontal;
+use cosmic::iced::core::widget::{Operation, Tree, tree};
+use cosmic::iced::core::{
     Alignment, Clipboard, Event, Length, Rectangle, Shell, Widget, layout, mouse, overlay, renderer,
 };
-use lingmo::iced::widget::{column, text};
-use lingmo::iced::{Size, Vector};
-use lingmo::widget::{
+use cosmic::iced::widget::{column, text};
+use cosmic::iced::{Size, Vector};
+use cosmic::widget::{
     button, container, dnd_source, icon, {self},
 };
-use lingmo::{Element, theme};
+use cosmic::{Element, theme};
 use std::borrow::Cow;
 use std::cell::RefCell;
 use std::iter;
@@ -51,7 +51,7 @@ impl<'a, Message: Clone + 'static> ApplicationButton<'a, Message> {
         on_finish: Option<Message>,
         on_cancel: Option<Message>,
     ) -> Self {
-        let lingmo::cosmic_theme::Spacing {
+        let cosmic::cosmic_theme::Spacing {
             space_xxs, space_s, ..
         } = theme::active().cosmic().spacing;
 
@@ -62,7 +62,7 @@ impl<'a, Message: Clone + 'static> ApplicationButton<'a, Message> {
                     source_icon_handle.as_ref().map(|i| {
                         Element::from(
                             container(app_source_icon(i.clone()))
-                                .class(lingmo::theme::Container::Card)
+                                .class(cosmic::theme::Container::Card)
                                 .width(Length::Fixed(24.0))
                                 .height(Length::Fixed(24.0))
                                 .align_x(Horizontal::Center)
@@ -122,7 +122,7 @@ impl<'a, Message: Clone + 'static> ApplicationButton<'a, Message> {
                     .height(Length::Fixed(72.0))
                     .into(),
                 tree::State::None,
-                lingmo::iced::Vector::ZERO,
+                cosmic::iced::Vector::ZERO,
             )
         })
         .drag_content(move || AppletString(path_.clone().unwrap()))
@@ -147,7 +147,7 @@ where
     }
 }
 
-impl<'a, Message> Widget<Message, lingmo::Theme, lingmo::Renderer>
+impl<'a, Message> Widget<Message, cosmic::Theme, cosmic::Renderer>
     for ApplicationButton<'a, Message>
 where
     Message: Clone,
@@ -165,14 +165,14 @@ where
         tree.diff_children(children.as_mut_slice());
     }
 
-    fn size(&self) -> lingmo::iced::core::Size<Length> {
+    fn size(&self) -> cosmic::iced::core::Size<Length> {
         self.content.as_widget().size()
     }
 
     fn layout(
         &mut self,
         tree: &mut Tree,
-        renderer: &lingmo::Renderer,
+        renderer: &cosmic::Renderer,
         limits: &layout::Limits,
     ) -> layout::Node {
         let size = self.size();
@@ -201,14 +201,14 @@ where
     fn draw(
         &self,
         tree: &Tree,
-        renderer: &mut lingmo::Renderer,
-        theme: &lingmo::theme::Theme,
+        renderer: &mut cosmic::Renderer,
+        theme: &cosmic::theme::Theme,
         renderer_style: &renderer::Style,
         layout: layout::Layout<'_>,
         cursor_position: mouse::Cursor,
         viewport: &Rectangle,
     ) {
-        use lingmo::iced::core::Renderer;
+        use cosmic::iced::core::Renderer;
         self.content.as_widget().draw(
             &tree.children[0],
             renderer,
@@ -243,7 +243,7 @@ where
         &mut self,
         tree: &mut Tree,
         layout: layout::Layout<'_>,
-        renderer: &lingmo::Renderer,
+        renderer: &cosmic::Renderer,
         operation: &mut dyn Operation<()>,
     ) {
         operation.traverse(&mut |operation| {
@@ -260,10 +260,10 @@ where
         &'b mut self,
         tree: &'b mut Tree,
         layout: layout::Layout<'b>,
-        renderer: &lingmo::Renderer,
+        renderer: &cosmic::Renderer,
         viewport: &Rectangle,
         translation: Vector,
-    ) -> Option<overlay::Element<'b, Message, lingmo::Theme, lingmo::Renderer>> {
+    ) -> Option<overlay::Element<'b, Message, cosmic::Theme, cosmic::Renderer>> {
         self.content.as_widget_mut().overlay(
             &mut tree.children[0],
             layout.children().next().unwrap(),
@@ -287,7 +287,7 @@ where
         event: &Event,
         layout: layout::Layout<'_>,
         cursor_position: mouse::Cursor,
-        renderer: &lingmo::Renderer,
+        renderer: &cosmic::Renderer,
         clipboard: &mut dyn Clipboard,
         shell: &mut Shell<'_, Message>,
         viewport: &Rectangle,
@@ -329,7 +329,7 @@ where
         layout: layout::Layout<'_>,
         cursor_position: mouse::Cursor,
         viewport: &Rectangle,
-        renderer: &lingmo::Renderer,
+        renderer: &cosmic::Renderer,
     ) -> mouse::Interaction {
         self.content.as_widget().mouse_interaction(
             &tree.children[0],
@@ -434,11 +434,11 @@ pub struct State {
 pub fn app_source_icon(handle: widget::icon::Handle) -> widget::Icon {
     let symbolic = handle.symbolic;
     handle.icon().size(16).class(if symbolic {
-        lingmo::theme::Svg::Custom(Rc::new(|t| {
+        cosmic::theme::Svg::Custom(Rc::new(|t| {
             let color = t.cosmic().on_primary_component_color().into();
             widget::svg::Style { color: Some(color) }
         }))
     } else {
-        lingmo::theme::Svg::Default
+        cosmic::theme::Svg::Default
     })
 }

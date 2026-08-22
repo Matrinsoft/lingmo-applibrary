@@ -16,7 +16,7 @@ use crate::config::VERSION;
 
 // TODO watch the desktop dirs for changes and update the list of apps on change
 
-fn main() -> lingmo::iced::Result {
+fn main() -> cosmic::iced::Result {
     // Initialize logger
     pretty_env_logger::init();
     info!("Cosmic App Library ({})", APP_ID);

@@ -1,10 +1,10 @@
 use crate::config::APP_ID;
 use crate::fl;
-use lingmo::cosmic_config::cosmic_config_derive::CosmicConfigEntry;
-use lingmo::cosmic_config::{
+use cosmic::cosmic_config::cosmic_config_derive::CosmicConfigEntry;
+use cosmic::cosmic_config::{
     CosmicConfigEntry, {self},
 };
-use lingmo::desktop::DesktopEntryData;
+use cosmic::desktop::DesktopEntryData;
 use serde::{Deserialize, Serialize};
 use std::sync::{Arc, LazyLock};
 use std::vec;

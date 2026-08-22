@@ -1,7 +1,7 @@
-use lingmo::iced::futures::{
+use cosmic::iced::futures::{
     SinkExt, {self},
 };
-use lingmo::iced::{Subscription, stream};
+use cosmic::iced::{Subscription, stream};
 use notify::{Config, EventKind, RecommendedWatcher, RecursiveMode, Watcher};
 use std::fmt::Debug;
 use std::hash::Hash;
@@ -14,7 +14,7 @@ pub enum Event {
 
 pub fn desktop_files<I: 'static + Hash + Copy + Send + Sync + Debug>(
     id: I,
-) -> lingmo::iced::Subscription<Event> {
+) -> cosmic::iced::Subscription<Event> {
     Subscription::run_with(id, |_| {
         stream::channel(
             50,
@@ -47,7 +47,7 @@ pub fn desktop_files<I: 'static + Hash + Copy + Send + Sync + Debug>(
                 );
 
                 if let Ok(mut watcher) = watcher {
-                    for path in lingmo::desktop::fde::default_paths() {
+                    for path in cosmic::desktop::fde::default_paths() {
                         let _ = watcher.watch(path.as_ref(), RecursiveMode::Recursive);
                     }
 
