@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-use cosmic::widget::icon;
+use lingmo::widget::icon;
 use std::collections::HashMap;
 use std::sync::{Mutex, OnceLock};
 

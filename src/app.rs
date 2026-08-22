@@ -7,17 +7,17 @@ use std::sync::{Arc, LazyLock};
 use std::time::{Duration, Instant};
 
 use clap::Parser;
-use cosmic::iced::event::wayland::OutputEvent;
-use cosmic::iced::platform_specific::shell::commands::layer_surface::set_padding;
-use cosmic::iced::runtime::platform_specific::wayland::CornerRadius;
-use cosmic::iced::runtime::platform_specific::wayland::layer_surface::IcedMargin;
-use cosmic::iced::runtime::{Action, platform_specific, task};
-use cosmic::iced::window;
-use cosmic::surface::action::{LiveSettings, app_layer_shell, simple_layer_shell, simple_popup};
-use cosmic::widget::menu::menu_column::MenuColumn;
-use cosmic::widget::space::horizontal;
-use cosmic::widget::{ListColumn, reorderable_flex_row};
-use cosmic::{
+use lingmo::iced::event::wayland::OutputEvent;
+use lingmo::iced::platform_specific::shell::commands::layer_surface::set_padding;
+use lingmo::iced::runtime::platform_specific::wayland::CornerRadius;
+use lingmo::iced::runtime::platform_specific::wayland::layer_surface::IcedMargin;
+use lingmo::iced::runtime::{Action, platform_specific, task};
+use lingmo::iced::window;
+use lingmo::surface::action::{LiveSettings, app_layer_shell, simple_layer_shell, simple_popup};
+use lingmo::widget::menu::menu_column::MenuColumn;
+use lingmo::widget::space::horizontal;
+use lingmo::widget::{ListColumn, reorderable_flex_row};
+use lingmo::{
     Element,
     app::{Core, CosmicFlags, Settings, Task},
     cctk::sctk::{
@@ -122,14 +122,14 @@ static SNAP: LazyLock<String> = LazyLock::new(|| fl!("snap"));
 static SYSTEM: LazyLock<String> = LazyLock::new(|| fl!("system"));
 
 static NEW_GROUP_WINDOW_ID: LazyLock<SurfaceId> = LazyLock::new(SurfaceId::unique);
-static NEW_GROUP_AUTOSIZE_ID: LazyLock<cosmic::widget::Id> =
-    LazyLock::new(cosmic::widget::Id::unique);
+static NEW_GROUP_AUTOSIZE_ID: LazyLock<lingmo::widget::Id> =
+    LazyLock::new(lingmo::widget::Id::unique);
 static DELETE_GROUP_WINDOW_ID: LazyLock<SurfaceId> = LazyLock::new(SurfaceId::unique);
-static DELETE_GROUP_AUTOSIZE_ID: LazyLock<cosmic::widget::Id> =
-    LazyLock::new(cosmic::widget::Id::unique);
+static DELETE_GROUP_AUTOSIZE_ID: LazyLock<lingmo::widget::Id> =
+    LazyLock::new(lingmo::widget::Id::unique);
 pub(crate) static MENU_ID: LazyLock<SurfaceId> = LazyLock::new(SurfaceId::unique);
-pub(crate) static MENU_AUTOSIZE_ID: LazyLock<cosmic::widget::Id> =
-    LazyLock::new(cosmic::widget::Id::unique);
+pub(crate) static MENU_AUTOSIZE_ID: LazyLock<lingmo::widget::Id> =
+    LazyLock::new(lingmo::widget::Id::unique);
 
 #[derive(Parser, Debug, Serialize, Deserialize, Clone)]
 #[command(author, version, about, long_about = None)]
@@ -172,7 +172,7 @@ impl FromStr for ApplicationsTasks {
     }
 }
 
-pub fn run() -> cosmic::iced::Result {
+pub fn run() -> lingmo::iced::Result {
     let args = Args::parse();
     let settings = Settings::default()
         .antialiasing(true)
@@ -185,9 +185,9 @@ pub fn run() -> cosmic::iced::Result {
 
     // Use standalone run if requested, otherwise use single-instance
     if matches!(args.subcommand, Some(ApplicationsTasks::Run)) {
-        cosmic::app::run::<CosmicAppLibrary>(settings, args)
+        lingmo::app::run::<CosmicAppLibrary>(settings, args)
     } else {
-        cosmic::app::run_single_instance::<CosmicAppLibrary>(settings, args)
+        lingmo::app::run_single_instance::<CosmicAppLibrary>(settings, args)
     }
 }
 
@@ -336,7 +336,7 @@ impl CosmicAppLibrary {
         self.needs_clear = true;
         let id = window::Id::unique();
         self.dummy_id = Some(id);
-        cosmic::surface::surface_task(simple_layer_shell::<Message>(
+        lingmo::surface::surface_task(simple_layer_shell::<Message>(
             || LiveSettings {
                 padding: Some(IcedMargin::default()),
                 corners: Some(CornerRadius::default()),
@@ -350,7 +350,7 @@ impl CosmicAppLibrary {
                     input_zone: Some(Vec::new()),
                     anchor: wlr_layer::Anchor::TOP,
                     output:
-                        cosmic::iced::runtime::platform_specific::wayland::layer_surface::IcedOutput::Active,
+                        lingmo::iced::runtime::platform_specific::wayland::layer_surface::IcedOutput::Active,
                     namespace: "cosmic_launcher_dummy".into(),
                     margin: IcedMargin::default(),
                     size: Some((Some(1200), Some(200))),
@@ -358,7 +358,7 @@ impl CosmicAppLibrary {
                     size_limits: Limits::NONE,
                 }
             },
-            None::<fn() -> Element<'static, cosmic::Action<Message>>>,
+            None::<fn() -> Element<'static, lingmo::Action<Message>>>,
         ))
     }
 
@@ -378,10 +378,10 @@ impl CosmicAppLibrary {
             self.load_apps();
             self.needs_clear = true;
             let fetch_gpus = Task::perform(try_get_gpus(), |gpus| {
-                cosmic::Action::App(Message::GpuUpdate(gpus))
+                lingmo::Action::App(Message::GpuUpdate(gpus))
             });
             return Task::batch(vec![
-                cosmic::surface::surface_task(app_layer_shell(
+                lingmo::surface::surface_task(app_layer_shell(
                     |app: &CosmicAppLibrary| LiveSettings {
                         padding: Some(app.layer_padding()),
                         corners: None,
@@ -426,7 +426,7 @@ impl CosmicAppLibrary {
             if self.core.system_theme().cosmic().frosted_system_interface {
                 task::effect(Action::PlatformSpecific(
                     platform_specific::Action::Wayland(
-                        cosmic::iced::runtime::platform_specific::wayland::Action::BlurSurface(
+                        lingmo::iced::runtime::platform_specific::wayland::Action::BlurSurface(
                             SurfaceId::RESERVED,
                             Some(vec![Rectangle {
                                 x: 0.,
@@ -440,7 +440,7 @@ impl CosmicAppLibrary {
             } else {
                 task::effect(Action::PlatformSpecific(
                     platform_specific::Action::Wayland(
-                        cosmic::iced::runtime::platform_specific::wayland::Action::BlurSurface(
+                        lingmo::iced::runtime::platform_specific::wayland::Action::BlurSurface(
                             SurfaceId::RESERVED,
                             None,
                         ),
@@ -536,15 +536,15 @@ enum MenuAction {
 
 pub fn menu_button<'a, Message: Clone + 'a>(
     content: impl Into<Element<'a, Message>>,
-) -> cosmic::widget::Button<'a, Message> {
-    cosmic::widget::button::custom(content)
+) -> lingmo::widget::Button<'a, Message> {
+    lingmo::widget::button::custom(content)
         .class(Button::MenuItem)
         .padding(menu_control_padding())
         .width(Length::Fill)
 }
 
 pub fn menu_control_padding() -> Padding {
-    let theme = cosmic::theme::active();
+    let theme = lingmo::theme::active();
     let cosmic = theme.cosmic();
     [cosmic.space_xxs(), cosmic.space_m()].into()
 }
@@ -559,7 +559,7 @@ impl CosmicAppLibrary {
 
     pub fn load_apps(&mut self) {
         let xdg_current_desktop = std::env::var("XDG_CURRENT_DESKTOP").ok();
-        self.all_entries = cosmic::desktop::load_applications(
+        self.all_entries = lingmo::desktop::load_applications(
             self.locale.as_slice(),
             false,
             xdg_current_desktop.as_deref(),
@@ -624,7 +624,7 @@ impl CosmicAppLibrary {
                 },
                 |(input, apps)| Message::FilterApps(input, apps),
             )
-            .map(cosmic::Action::App)
+            .map(lingmo::Action::App)
         } else {
             iced::Task::none()
         }
@@ -638,7 +638,7 @@ impl CosmicAppLibrary {
         if self.dnd_icon.take().is_some() {
             return Task::batch(vec![
                 end_dnd(),
-                Task::perform(async {}, |_| cosmic::Action::App(Message::Hide)),
+                Task::perform(async {}, |_| lingmo::Action::App(Message::Hide)),
             ]);
         }
         self.focused_id = None;
@@ -666,18 +666,18 @@ impl CosmicAppLibrary {
         &mut self,
         i: usize,
         gpu_idx: Option<usize>,
-    ) -> Task<<Self as cosmic::Application>::Message> {
+    ) -> Task<<Self as lingmo::Application>::Message> {
         self.edit_name = None;
         if let Some(de) = self.entry_path_input.get(i) {
             let app_id = de.id.clone();
             let exec = de.exec.clone().unwrap();
             let terminal = de.terminal;
             request_token(
-                Some(String::from(<Self as cosmic::Application>::APP_ID)),
+                Some(String::from(<Self as lingmo::Application>::APP_ID)),
                 Some(SurfaceId::RESERVED),
             )
             .map(move |t| {
-                cosmic::Action::App(Message::ActivationToken(
+                lingmo::Action::App(Message::ActivationToken(
                     t,
                     app_id.clone(),
                     exec.clone(),
@@ -691,7 +691,7 @@ impl CosmicAppLibrary {
     }
 }
 
-impl cosmic::Application for CosmicAppLibrary {
+impl lingmo::Application for CosmicAppLibrary {
     type Message = Message;
     type Executor = executor::Default;
     type Flags = Args;
@@ -735,17 +735,17 @@ impl cosmic::Application for CosmicAppLibrary {
                 keyboard_nav::Action::FocusNext => {
                     return iced::Task::batch(vec![
                         iced::widget::operation::focus_next()
-                            .map(|id| cosmic::Action::App(Message::UpdateFocused(id))),
+                            .map(|id| lingmo::Action::App(Message::UpdateFocused(id))),
                         iced_runtime::task::widget(find_focused())
-                            .map(|id| cosmic::Action::App(Message::UpdateFocused(Some(id)))),
+                            .map(|id| lingmo::Action::App(Message::UpdateFocused(Some(id)))),
                     ]);
                 }
                 keyboard_nav::Action::FocusPrevious => {
                     return iced::Task::batch(vec![
                         iced::widget::operation::focus_previous()
-                            .map(|id| cosmic::Action::App(Message::UpdateFocused(id))),
+                            .map(|id| lingmo::Action::App(Message::UpdateFocused(id))),
                         iced_runtime::task::widget(find_focused())
-                            .map(|id| cosmic::Action::App(Message::UpdateFocused(Some(id)))),
+                            .map(|id| lingmo::Action::App(Message::UpdateFocused(Some(id)))),
                     ]);
                 }
                 keyboard_nav::Action::Escape => return self.on_escape(),
@@ -765,9 +765,9 @@ impl cosmic::Application for CosmicAppLibrary {
 
                     return iced::Task::batch(vec![
                         iced::widget::operation::focus_previous()
-                            .map(|id| cosmic::Action::App(Message::UpdateFocused(id))),
+                            .map(|id| lingmo::Action::App(Message::UpdateFocused(id))),
                         iced_runtime::task::widget(find_focused())
-                            .map(|id| cosmic::Action::App(Message::UpdateFocused(Some(id)))),
+                            .map(|id| lingmo::Action::App(Message::UpdateFocused(Some(id)))),
                     ]);
                 }
                 i = i.saturating_sub(7);
@@ -780,7 +780,7 @@ impl cosmic::Application for CosmicAppLibrary {
                 self.focused_id = Some(focused.clone());
                 return Task::batch(vec![
                     iced_runtime::task::widget(focus(focused))
-                        .map(|id| cosmic::Action::App(Message::UpdateFocused(Some(id)))),
+                        .map(|id| lingmo::Action::App(Message::UpdateFocused(Some(id)))),
                     iced_runtime::task::widget(operation::scrollable::snap_to(
                         self.scrollable_id.clone(),
                         RelativeOffset {
@@ -801,9 +801,9 @@ impl cosmic::Application for CosmicAppLibrary {
                     self.focused_id = None;
                     return iced::Task::batch(vec![
                         iced::widget::operation::focus_next()
-                            .map(|id| cosmic::Action::App(Message::UpdateFocused(id))),
+                            .map(|id| lingmo::Action::App(Message::UpdateFocused(id))),
                         iced_runtime::task::widget(find_focused())
-                            .map(|id| cosmic::Action::App(Message::UpdateFocused(Some(id)))),
+                            .map(|id| lingmo::Action::App(Message::UpdateFocused(Some(id)))),
                     ]);
                 }
                 i += 7;
@@ -824,7 +824,7 @@ impl cosmic::Application for CosmicAppLibrary {
                         },
                     )),
                     iced_runtime::task::widget(focus(focused))
-                        .map(|id| cosmic::Action::App(Message::UpdateFocused(Some(id)))),
+                        .map(|id| lingmo::Action::App(Message::UpdateFocused(Some(id)))),
                 ]);
             }
             Message::InputChanged(value) => {
@@ -838,7 +838,7 @@ impl cosmic::Application for CosmicAppLibrary {
                             if id == SurfaceId::RESERVED {
                                 return text_input::focus(SEARCH_ID.clone()).chain(
                                     iced_runtime::task::widget(find_focused()).map(|id| {
-                                        cosmic::Action::App(Message::UpdateFocused(Some(id)))
+                                        lingmo::Action::App(Message::UpdateFocused(Some(id)))
                                     }),
                                 );
                             } else if id == *DELETE_GROUP_WINDOW_ID {
@@ -898,7 +898,7 @@ impl cosmic::Application for CosmicAppLibrary {
                     env_vars.extend(gpus[idx].environment.clone());
                 }
                 tokio::spawn(async move {
-                    cosmic::desktop::spawn_desktop_exec(exec, env_vars, Some(&app_id), terminal)
+                    lingmo::desktop::spawn_desktop_exec(exec, env_vars, Some(&app_id), terminal)
                         .await
                 });
                 return self.update(Message::Hide);
@@ -1043,7 +1043,7 @@ impl cosmic::Application for CosmicAppLibrary {
                 } else {
                     self.menu = Some(i);
                     let offset = self.scroll_offset as i32;
-                    return cosmic::surface::surface_task(simple_popup(
+                    return lingmo::surface::surface_task(simple_popup(
                         || LiveSettings::default(),
                         move || {
                             SctkPopupSettings {
@@ -1070,7 +1070,7 @@ impl cosmic::Application for CosmicAppLibrary {
                         input_zone: None,
                     }
                         },
-                        None::<Box<fn() -> cosmic::Element<'static, cosmic::Action<Message>>>>,
+                        None::<Box<fn() -> lingmo::Element<'static, lingmo::Action<Message>>>>,
                     ));
                 }
             }
@@ -1111,7 +1111,7 @@ impl cosmic::Application for CosmicAppLibrary {
                         }
                     }
                 }
-                return cosmic::Task::batch(tasks);
+                return lingmo::Task::batch(tasks);
             }
             Message::StartDrag(i) => {
                 self.dnd_icon = Some(i);
@@ -1364,7 +1364,7 @@ impl cosmic::Application for CosmicAppLibrary {
             }
 
             // add to pinned
-            let svg_accent = Rc::new(|theme: &cosmic::Theme| {
+            let svg_accent = Rc::new(|theme: &lingmo::Theme| {
                 let color = theme.cosmic().accent_color().into();
                 svg::Style { color: Some(color) }
             });
@@ -1373,7 +1373,7 @@ impl cosmic::Application for CosmicAppLibrary {
                 if is_pinned {
                     row![
                         icon::icon(icon::from_name("checkbox-checked-symbolic").size(16).into())
-                            .class(cosmic::theme::Svg::Custom(svg_accent.clone())),
+                            .class(lingmo::theme::Svg::Custom(svg_accent.clone())),
                         text::body(fl!("pin-to-app-tray"))
                     ]
                 } else {
@@ -1548,7 +1548,7 @@ impl cosmic::Application for CosmicAppLibrary {
             .align_y(Alignment::Center)
         };
 
-        // TODO grid widget in libcosmic
+        // TODO grid widget in liblingmo
         let app_grid_list: Vec<_> = self
             .entry_path_input
             .iter()
@@ -1777,23 +1777,23 @@ impl cosmic::Application for CosmicAppLibrary {
         Subscription::batch(vec![
             desktop_files(0).map(|_| Message::LoadApps),
             listen_with(|e, status, id| match e {
-                cosmic::iced::Event::PlatformSpecific(PlatformSpecific::Wayland(
+                lingmo::iced::Event::PlatformSpecific(PlatformSpecific::Wayland(
                     wayland::Event::Layer(e, _, id),
                 )) => Some(Message::Layer(e, id)),
-                cosmic::iced::Event::PlatformSpecific(PlatformSpecific::Wayland(
+                lingmo::iced::Event::PlatformSpecific(PlatformSpecific::Wayland(
                     wayland::Event::OverlapNotify(event, ..),
                 )) => Some(Message::Overlap(event)),
-                cosmic::iced::Event::Keyboard(cosmic::iced::keyboard::Event::KeyReleased {
+                lingmo::iced::Event::Keyboard(lingmo::iced::keyboard::Event::KeyReleased {
                     key: Key::Named(Named::Escape),
                     modifiers: _mods,
                     ..
                 }) => Some(Message::Hide),
-                cosmic::iced::Event::Mouse(iced::mouse::Event::ButtonPressed(_))
+                lingmo::iced::Event::Mouse(iced::mouse::Event::ButtonPressed(_))
                     if id == SurfaceId::RESERVED =>
                 {
                     Some(Message::CloseContextMenu)
                 }
-                cosmic::iced::Event::Keyboard(iced::keyboard::Event::KeyPressed {
+                lingmo::iced::Event::Keyboard(iced::keyboard::Event::KeyPressed {
                     key,
                     text: _,
                     modifiers,
@@ -1833,10 +1833,10 @@ impl cosmic::Application for CosmicAppLibrary {
                     }
                     _ => None,
                 },
-                cosmic::iced::Event::Window(WindowEvent::Opened { position: _, size }) => {
+                lingmo::iced::Event::Window(WindowEvent::Opened { position: _, size }) => {
                     Some(Message::Opened(size, id))
                 }
-                cosmic::iced::Event::PlatformSpecific(PlatformSpecific::Wayland(
+                lingmo::iced::Event::PlatformSpecific(PlatformSpecific::Wayland(
                     wayland::Event::Output(event, _),
                 )) => Some(Message::Output(event)),
                 _ => None,
@@ -1854,9 +1854,9 @@ impl cosmic::Application for CosmicAppLibrary {
         &mut self.core
     }
 
-    fn init(mut core: Core, flags: Args) -> (Self, iced::Task<cosmic::Action<Self::Message>>) {
+    fn init(mut core: Core, flags: Args) -> (Self, iced::Task<lingmo::Action<Self::Message>>) {
         core.set_keyboard_nav(false);
-        core.set_app_type(cosmic::core::AppType::System);
+        core.set_app_type(lingmo::core::AppType::System);
 
         let helper = AppLibraryConfig::helper();
 
@@ -1893,7 +1893,7 @@ impl cosmic::Application for CosmicAppLibrary {
 
         // Auto-activate when running in standalone mode
         let task = if matches!(flags.subcommand, Some(ApplicationsTasks::Run)) {
-            Task::done(cosmic::Action::App(Message::Activate))
+            Task::done(lingmo::Action::App(Message::Activate))
         } else {
             Task::none()
         };

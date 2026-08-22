@@ -1,4 +1,4 @@
-﻿[package]
+[package]
 name = "cosmic-app-library"
 version = "1.0.12"
 authors = ["Ashley Wulber <ashley@system76.com>"]
@@ -11,7 +11,7 @@ wgpu = ["libcosmic/wgpu"]
 
 [dependencies]
 zbus = "5.12"
-libcosmic = { git = "https://github.com/Matrinsoft/libcosmic", features = [
+liblingmo = { git = "https://github.com/Matrinsoft/liblingmo", features = [
     "dbus-config",
     "desktop",
     "winit",
@@ -50,9 +50,9 @@ cosmic-app-list-config = { git = "https://github.com/Matrinsoft/lingmo-applets" 
 [profile.release]
 lto = "thin"
 
-# [patch."https://github.com/Matrinsoft/libcosmic/"]
-# libcosmic = { git = "https://github.com/Matrinsoft/libcosmic//", branch = "theme-v2" }
-# cosmic-config = { git = "https://github.com/Matrinsoft/libcosmic//", branch = "theme-v2" }
-# cosmic-theme = { git = "https://github.com/Matrinsoft/libcosmic//", branch = "theme-v2" }
+# [patch."https://github.com/Matrinsoft/liblingmo/"]
+# liblingmo = { git = "https://github.com/Matrinsoft/liblingmo//", branch = "theme-v2" }
+# cosmic-config = { git = "https://github.com/Matrinsoft/liblingmo//", branch = "theme-v2" }
+# cosmic-theme = { git = "https://github.com/Matrinsoft/liblingmo//", branch = "theme-v2" }
 # cosmic-config = { path = "../libcosmic/cosmic-config/" }
-# libcosmic = { path = "../libcosmic/" }
+# liblingmo = { path = "../libcosmic/" }
