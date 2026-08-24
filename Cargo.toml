@@ -10,7 +10,7 @@ default = ["wgpu"]
 wgpu = ["libcosmic/wgpu"]
 
 [dependencies]
-zbus = "5.12"
+zbus = "5.14"
 libcosmic = { git = "https://github.com/Matrinsoft/liblingmo", features = [
     "dbus-config",
     "desktop",
