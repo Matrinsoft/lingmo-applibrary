@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ashley Wulber 2019 <ashley@system76.com> -->
+<component type="desktop-application">
+  <id>com.lingmoos.LingmoAppLibrary</id>
+  <metadata_license>CC0</metadata_license>
+  <!-- Insert your license of choice here -->
+  <!-- <project_license>MIT</project_license> -->
+  <name>Lingmo App Library</name>
+  <name xml:lang="ar">مكتبة تطبيقات Lingmo</name>
+  <name xml:lang="bg">Библиотека за програми на Lingmo</name>
+  <name xml:lang="cs">Knihovna aplikací Lingmo</name>
+  <name xml:lang="hu">Lingmo Alkalmazáskönyvtár</name>
+  <name xml:lang="pt_BR">Biblioteca de Aplicativos</name>
+  <name xml:lang="pt">Biblioteca de Aplicativos</name>
+  <name xml:lang="ru">Библиотека приложений Lingmo</name>
+  <name xml:lang="sk">Knižnica aplikácií Lingmo</name>
+  <name xml:lang="es">Biblioteca de aplicaciones Lingmo</name>
+  <name xml:lang="sv">Lingmo Programbibliotek</name>
+  <name xml:lang="it">Libreria applicazioni Lingmo</name>
+  <summary>Lingmo desktop application library</summary>
+  <summary xml:lang="ar">مكتبة تطبيقات سطح المكتب Lingmo</summary>
+  <summary xml:lang="cs">Knihovna aplikací pro prostředí Lingmo</summary>
+  <summary xml:lang="hu">A Lingmo asztali környezet alkalmazáskönyvtára</summary>
+  <summary xml:lang="pt_BR">Biblioteca de aplicativos do desktop Lingmo</summary>
+  <summary xml:lang="pt">Biblioteca de aplicativos do desktop Lingmo</summary>
+  <summary xml:lang="ru">Библиотека приложений оболочки Lingmo</summary>
+  <summary xml:lang="sk">Knižnica aplikácií pre pracovné prostredie Lingmo</summary>
+  <summary xml:lang="es">Biblioteca de aplicaciones para el escritorio Lingmo</summary>
+  <summary xml:lang="sv">Programbibliotek för skrivbordsmiljön Lingmo</summary>
+  <summary xml:lang="it">Libreria di applicazioni del desktop Lingmo</summary>
+  <description>
+    <p>The default application library for the Lingmo desktop</p>
+    <p xml:lang="ar">مكتبة التطبيقات المبدئية لسطح مكتب Lingmo</p>
+    <p xml:lang="cs">Výchozí knihovna aplikací pro prostředí Lingmo</p>
+    <p xml:lang="hu">A Lingmo asztali környezet alapértelmezett alkalmazáskönyvtára</p>
+    <p xml:lang="pt_BR">A aplicação padrão de biblioteca de aplicativos do desktop Lingmo</p>
+    <p xml:lang="pt">A aplicação padrão de biblioteca de aplicativos do desktop Lingmo</p>
+    <p xml:lang="ru">Библиотека приложений по умолчанию для оболочки Lingmo</p>
+    <p xml:lang="sk">Predvolená knižnica aplikácií pre pracovné prostredie Lingmo</p>
+    <p xml:lang="es">Biblioteca de aplicaciones para el escritorio Lingmo</p>
+    <p xml:lang="sv">Standard programbibliotek för skrivbordsmiljön Lingmo</p>
+    <p xml:lang="it">Libreria applicazioni di default per il desktop Lingmo</p>
+  </description>
+  <!-- <screenshots>
+    <screenshot type="default">
+      <image>https://gitlab.gnome.org/bilelmoussaoui/cosmic-app-library/raw/master/data/resources/screenshots/screenshot1.png</image>
+      <caption>Main window</caption>
+    </screenshot>
+  </screenshots> -->
+  <url type="homepage">https://github.com/Matrinsoft/lingmo-applibrary</url>
+  <url type="bugtracker">https://github.com/Matrinsoft/lingmo-applibrary/issues</url>
+  <content_rating type="oars-1.0" />
+  <releases>
+    <release version="0.1.0" date="2019-07-11" />
+  </releases>
+  <kudos>
+     <!--
+       GNOME Software kudos:
+       https://gitlab.gnome.org/GNOME/gnome-software/-/blob/main/doc/kudos.md
+     -->
+     <kudo>ModernToolkit</kudo>
+     <kudo>HiDpiIcon</kudo>
+  </kudos>
+  <developer_name>Ashley Wulber</developer_name>
+  <update_contact>ashley@system76.com</update_contact>
+  <translation type="gettext">lingmo-app-library</translation>
+  <launchable type="desktop-id">com.lingmoos.LingmoAppLibrary.desktop</launchable>
+</component>
