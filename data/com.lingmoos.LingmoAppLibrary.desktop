@@ -34,6 +34,6 @@ Categories=COSMIC;
 # Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 Keywords=COSMIC;ICED;
 # Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-Icon=com.system76.CosmicAppLibrary
+Icon=com.lingmoos.LingmoAppLibrary
 StartupNotify=true
 NoDisplay=true

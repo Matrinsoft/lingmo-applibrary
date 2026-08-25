@@ -695,7 +695,7 @@ impl cosmic::Application for CosmicAppLibrary {
     type Message = Message;
     type Executor = executor::Default;
     type Flags = Args;
-    const APP_ID: &'static str = "com.system76.CosmicAppLibrary";
+    const APP_ID: &'static str = "com.lingmoos.LingmoAppLibrary";
 
     fn core(&self) -> &Core {
         &self.core
